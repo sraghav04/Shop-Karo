@@ -18,11 +18,6 @@ jobs:
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
-        with:
-          comment_on_review: true
-          additional_rules: |
-            check_for_bugs: true
-            check_for_security_vulnerabilities: true
-            check_for_code_smells: true
-            check_for_best_practices: true
-            check_for_performance_issues: true
+          GITHUB_ACTION_CONFIG.AUTO_DESCRIBE: true
+          GITHUB_ACTION_CONFIG.AUTO_REVIEW: true
+          GITHUB_ACTION_CONFIG.AUTO_IMPROVE: true
