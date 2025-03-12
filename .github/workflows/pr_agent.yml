@@ -1,7 +1,9 @@
 on:
   pull_request:
-    types: [opened, reopened, ready_for_review]
+    types: [opened, reopened, ready_for_review, synchronize]
   issue_comment:
+    types: [created]
+    if: ${{ github.event.comment.body == 'run pr agent' }}
 jobs:
   pr_agent_job:
     if: ${{ github.event.sender.type != 'Bot' }}
@@ -9,16 +11,16 @@ jobs:
     permissions:
       issues: write
       pull-requests: write
-      contents: write
+      contents: read
     name: Run pr agent on every pull request, respond to user comments
     steps:
       - name: PR Agent action step
         id: pragent
-        uses: qodo-ai/pr-agent@main
+        uses: qodo-ai/pr-agent@v1.0.0
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
           GITHUB_ACTION_CONFIG.AUTO_DESCRIBE: true
           GITHUB_ACTION_CONFIG.AUTO_REVIEW: true
           GITHUB_ACTION_CONFIG.AUTO_IMPROVE: true
-          github_action_config.pr_actions: '["opened", "reopened", "ready_for_review", "review_requested"]'
+          GITHUB_ACTION_CONFIG.PR_ACTIONS: '["opened", "reopened", "ready_for_review", "review_requested"]'
