@@ -20,7 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
         with:
           comment_on_review: true
-          additional_rules:
+          additional_rules: |
             check_for_bugs: true
             check_for_security_vulnerabilities: true
             check_for_code_smells: true
