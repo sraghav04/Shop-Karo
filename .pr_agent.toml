@@ -1,0 +1,9 @@
+[pr_reviewer]
+enable_review_labels_effort = true
+
+
+[pr_code_suggestions]
+focus_only_on_problems=true
+
+[best_practices]
+enable_global_best_practices = true
